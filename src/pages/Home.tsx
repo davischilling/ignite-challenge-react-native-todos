@@ -52,11 +52,13 @@ export function Home() {
   }
 
   function handleEditTask({ taskId, taskNewTitle }: EditedTask) {
+    //TODO - don't allow same name
     const taskWithSameTitle = tasks.find(task => task.title === taskNewTitle)
     if (taskWithSameTitle) {
       Alert.alert('Task ja cadastrada', 'Voce nao pode cadastrar uma task com o mesmo nome')
       return false
     } 
+    //TODO - edit task from state
     const updatedTasks = tasks.map(task => ({ ...task }))
     const taskToBeUpdated = updatedTasks.find(task => task.id === taskId)
     if (!taskToBeUpdated)
@@ -64,13 +66,6 @@ export function Home() {
     taskToBeUpdated.title = taskNewTitle
     setTasks(updatedTasks)
     return true
-    //TODO - edit task from state
-    // setTasks(oldState => oldState.map(task => {
-    //   if (task.id === taskId) {
-    //     task.title = taskNewTitle
-    //   }
-    //   return task
-    // }))
   }
 
   return (
